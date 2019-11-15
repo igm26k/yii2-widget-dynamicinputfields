@@ -1,0 +1,30 @@
+{
+  "name": "igm26k/yii2-widget-dynamicinputfields",
+  "description": "Add/remove input fields dynamically",
+  "keywords": [
+    "yii2",
+    "extension",
+    "widget",
+    "form"
+  ],
+  "homepage": "https://github.com/igm26k/yii2-widget-dynamicinputfields",
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Ilya Golubev",
+      "email": "golubevim26k@gmail.com",
+      "homepage": "http://igm26k.ru/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "igm26k\\": "src"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
