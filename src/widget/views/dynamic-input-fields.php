@@ -67,11 +67,17 @@ use yii\helpers\Html; ?>
         <?php
     }
     ?>
+    <div class="item form-row align-items-center">
+        <div class='add'>+</div>
+    </div>
 </div>
 <script>
     $("#<?= $id ?> > .item").each(function () {
         ths = $(this);
         ths.find(".clearfix").before("<div class='delete'>&times;</div>");
+    });
 
+    $("#<?= $id ?> > .add").click(function () {
+        $("#<?= $id ?> > .item").last().clone().appendTo('#<?= $id ?> > .item:last-child');
     });
 </script>
