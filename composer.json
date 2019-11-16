@@ -19,7 +19,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "igm26k\\": "src"
+      "igm26k\\DynamicInputFields\\": "src"
     }
   },
   "extra": {
