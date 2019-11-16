@@ -5,7 +5,9 @@
  * @var $label string
  */
 
-use yii\helpers\Html; ?>
+use yii\helpers\Html;
+
+?>
 <style>
     #<?= $id ?> .item {
         padding: 5px 0;
