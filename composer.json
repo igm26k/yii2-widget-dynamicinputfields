@@ -19,7 +19,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Igm26k\\Yii2WidgetDynamicinputfields\\": "src"
+      "Igm26k\\DynamicInputFields\\": "src"
     }
   },
   "extra": {

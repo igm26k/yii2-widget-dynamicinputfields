@@ -1,6 +1,6 @@
 <?php
 
-namespace Igm26k\Yii2WidgetDynamicinputfields;
+namespace Igm26k\DynamicInputFields\widget;
 
 use yii\base\Widget;
 
