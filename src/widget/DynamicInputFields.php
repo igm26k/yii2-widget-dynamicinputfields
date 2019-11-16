@@ -26,7 +26,7 @@ class DynamicInputFields extends Widget
         return $this->render('dynamic-input-fields', [
             'label' => $this->label,
             'id'    => $this->id,
-            'rows'  => $this->rows,
+            'rows'  => $this->rows
         ]);
     }
 }
