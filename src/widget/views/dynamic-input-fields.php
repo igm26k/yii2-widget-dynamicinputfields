@@ -15,15 +15,21 @@ use yii\helpers\Html;
 
     #<?= $id ?> .add,
     #<?= $id ?> .delete {
-                    cursor: pointer;
-                    float: right;
-                    font-size: 24px;
-                    padding-right: 15px;
-                }
+        cursor: pointer;
+        float: right;
+        font-size: 24px;
+        padding-right: 15px;
+    }
 
     #<?= $id ?> .item:hover {
-                    background: #b9e6b9;
-                }
+        background: #b9e6b9;
+    }
+
+    #<?= $id ?> .difFlexContent {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 <label class="control-label" for="columns"><?= $label ?></label>
 <div id="<?= $id ?>">
@@ -39,10 +45,16 @@ use yii\helpers\Html;
             continue;
         }
         ?>
-        <div class="item form-row align-items-center">
+        <div class="item form-row align-items-center difFlexContent">
             <?php
             foreach ($row['inputs'] as $index => $input) {
-                echo '<div class="col-sm-3 my-1">';
+                $options = ['class' => 'form-control'];
+
+                if (!empty($input['options'])) {
+                    $options = $input['options'];
+                }
+//                echo '<div class="col-sm-3 my-1">';
+
                 switch ($input['type']) {
                     case 'text':
                     default:
@@ -50,7 +62,7 @@ use yii\helpers\Html;
                             $input['type'],
                             $input['name'],
                             $input['value'],
-                            ['class' => 'form-control']
+                            $options
                         );
                         break;
                     case 'select':
@@ -58,14 +70,15 @@ use yii\helpers\Html;
                             $input['name'],
                             $input['value'],
                             $input['items'],
-                            ['class' => 'form-control']
+                            $options
                         );
                         break;
                 }
-                echo '</div>';
+
+//                echo '</div>';
             }
             ?>
-            <div class="clearfix"></div>
+<!--            <div class="clearfix"></div>-->
         </div>
         <?php
     }
