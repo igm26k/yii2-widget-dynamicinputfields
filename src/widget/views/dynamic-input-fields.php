@@ -9,52 +9,59 @@ use yii\helpers\Html;
 
 ?>
 <style>
-    #<?= $id ?> .item {
+    #<?= $id ?>.difWrapper .item {
         padding: 5px 0;
     }
 
-    #<?= $id ?> .add,
-    #<?= $id ?> .delete {
+    #<?= $id ?>.difWrapper .difFlexRow {
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #<?= $id ?>.difWrapper .difLabels > input {
+        border: 0;
+        background: none;
+        cursor: default;
+        font-weight: bold;
+    }
+
+    #<?= $id ?>.difWrapper .add,
+    #<?= $id ?>.difWrapper .delete {
         cursor: pointer;
         float: right;
         font-size: 24px;
         padding-right: 15px;
     }
 
-    #<?= $id ?> .item:hover {
+    #<?= $id ?>.difWrapper .item:hover {
         background: #b9e6b9;
-    }
-
-    #<?= $id ?> .difFlexContent {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 </style>
 <label class="control-label" for="columns"><?= $label ?></label>
-<div id="<?= $id ?>">
+<div id="<?= $id ?>" class="difWrapper">
     <?php
     foreach ($rows as $rowKey => $row) {
         if ($rowKey === 'labels') {
+            echo '<div class="difLabels difFlexRow">';
+
             foreach ($row as $label) {
-                echo "<label class='col-sm-3 my-1 control-label'>{$label}</label>";
+                echo Html::input(
+                    'text',
+                    '',
+                    $label,
+                    ['class' => 'form-control disabled', 'disabled' => 'disabled']
+                );
             }
 
-            echo '<div class="clearfix"></div>';
+            echo '</div>';
 
             continue;
         }
         ?>
-        <div class="item form-row align-items-center difFlexContent">
+        <div class="item form-row difFlexRow">
             <?php
             foreach ($row['inputs'] as $index => $input) {
-                $options = ['class' => 'form-control'];
-
-                if (!empty($input['options'])) {
-                    $options = $input['options'];
-                }
-//                echo '<div class="col-sm-3 my-1">';
-
                 switch ($input['type']) {
                     case 'text':
                     default:
@@ -62,7 +69,7 @@ use yii\helpers\Html;
                             $input['type'],
                             $input['name'],
                             $input['value'],
-                            $options
+                            ['class' => 'form-control']
                         );
                         break;
                     case 'select':
@@ -70,15 +77,13 @@ use yii\helpers\Html;
                             $input['name'],
                             $input['value'],
                             $input['items'],
-                            $options
+                            ['class' => 'form-control']
                         );
                         break;
                 }
-
-//                echo '</div>';
             }
             ?>
-<!--            <div class="clearfix"></div>-->
+            <div class="delete">&times;</div>
         </div>
         <?php
     }
@@ -100,20 +105,20 @@ use yii\helpers\Html;
         });
     }
 
-    function difSetDelButtons() {
-        $("#<?= $id ?> > .item").each(function (index) {
-            $(this).find(".clearfix").before("<div class='delete'>&times;</div>");
-        });
-    }
-
     function difBindDelButtons() {
         $("#<?= $id ?> .delete").off('click');
         $("#<?= $id ?> .delete").click(function () {
-            $(this).closest('.item').remove();
+            if ($("#<?= $id ?> .delete").length > 1) {
+                $(this).closest('.item').remove();
+            }
+            else {
+                $("#<?= $id ?> .delete").closest('.item').find('*').each(function () {
+                    $(this).val('');
+                });
+            }
         });
     }
 
-    difSetDelButtons();
     difBindDelButtons();
 
     $("#<?= $id ?> .add").click(function () {
